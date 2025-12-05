@@ -1,0 +1,205 @@
+======================================================================
+CONFIGURATION
+======================================================================
+VERSION F1-SCORE : Early stopping basé sur F1-score (adapté aux datasets déséquilibrés)
+======================================================================
+Device: mps
+
+======================================================================
+ÉTAPE 1: Création du modèle
+======================================================================
+Mode: Fine-tuning sélectif (couches gelées: ['conv1', 'bn1', 'layer1'])
+
+Modèle resnet18 créé
+Paramètres totaux: 11,171,266
+Paramètres entraînables: 6,371,586 (57.0%)
+Paramètres gelés: 4,799,680 (43.0%)
+
+======================================================================
+ÉTAPE 2: Préparation des données
+======================================================================
+Création des datasets...
+Filtrage des images avec artefacts...
+Total d'images: 21165
+Seuil: 0.2, Sensibilité: medium
+
+21163 images propres sur 21165 (100.0%)
+Dataset PyTorch créé avec 21163 images propres
+Filtrage des images avec artefacts...
+Total d'images: 21165
+Seuil: 0.2, Sensibilité: medium
+
+21163 images propres sur 21165 (100.0%)
+Dataset PyTorch créé avec 21163 images propres
+Train dataset: 21163 images
+Val dataset: 21163 images
+
+Calcul des poids de classes...
+Distribution binaire:
+Non-COVID: 17549 (82.92%)
+COVID: 3614 (17.08%)
+Poids Non-COVID: 0.6030
+Poids COVID: 2.9279
+
+Création du sampler...
+
+Création des DataLoaders...
+Train loader: 1323 batches
+Val loader: 1323 batches
+
+======================================================================
+ÉTAPE 3: Configuration optimiseur
+======================================================================
+Loss, Optimizer et Scheduler configurés
+
+======================================================================
+ÉTAPE 4: Chargement du modèle sauvegardé
+======================================================================
+Mode: Fine-tuning sélectif (couches gelées: ['conv1', 'bn1', 'layer1'])
+
+Modèle resnet18 créé
+Paramètres totaux: 11,171,266
+Paramètres entraînables: 6,371,586 (57.0%)
+Paramètres gelés: 4,799,680 (43.0%)
+Format détecté: checkpoint complet (epoch 9)
+Modèle chargé depuis 'best_model_resnet18.pth'
+Modèle déplacé sur mps
+Paramètres totaux: 11,171,266
+Paramètres entraînables: 6,371,586
+Modèle chargé depuis: best_model_resnet18.pth
+
+======================================================================
+ÉTAPE 5: Évaluation (seuil 0.5)
+======================================================================
+======================================================================
+RAPPORT DE CLASSIFICATION
+Seuil de décision: 0.5000
+======================================================================
+
+Classification Binaire - COVID vs Non-COVID
+Classe          Precision    Recall       F1-Score     Support
+------------------------------------------------------------
+Non-COVID       0.9875       0.9687       0.9780       17549
+COVID           0.8607       0.9405       0.8988       3614
+
+Matrice de Confusion:
+============================================================
+                Prédit Non-COVID     Prédit COVID
+------------------------------------------------------------
+Réel Non-COVID  16999                550
+Réel COVID      215                  3399
+
+Interprétation:
+Vrais Négatifs (TN): 16999
+Faux Positifs (FP): 550
+Faux Négatifs (FN): 215
+Vrais Positifs (TP): 3399
+
+Métriques médicales:
+Sensibilité (Recall COVID): 0.9405
+Spécificité (Recall Non-COVID): 0.9687
+
+Seuil de décision utilisé: 0.5000
+
+======================================================================
+ÉTAPE 6: Analyse des seuils
+======================================================================
+======================================================================
+ANALYSE DES SEUILS DE DÉCISION
+======================================================================
+
+1. Seuil optimal pour F1-score maximum:
+   Seuil: 0.6811
+   F1-score: 0.9103
+   Precision COVID: 0.9198
+   Recall COVID: 0.9009
+
+2. Seuil équilibré (precision ≈ recall):
+   Seuil: 0.6514
+   Precision COVID: 0.9084
+   Recall COVID: 0.9084
+
+3. Seuil pour précision COVID >= 0.7:
+   Seuil: 0.1832
+   Precision COVID: 0.7001
+   Recall COVID: 0.9806
+
+4. Seuil actuel (par défaut): 0.5000
+   Precision COVID: 0.8607
+   Recall COVID: 0.9405
+   F1-score: 0.8988
+
+======================================================================
+RECOMMANDATION
+======================================================================
+Pour réduire les faux positifs (améliorer la précision COVID):
+   Utilisez le seuil: 0.1832
+   Cela donnera une précision COVID de 0.7001
+   au prix d'une réduction du recall à 0.9806
+
+Seuil choisi: 0.6811 (F1-score optimal)
+
+======================================================================
+ÉTAPE 7: Évaluation avec seuil optimal
+======================================================================
+======================================================================
+RAPPORT DE CLASSIFICATION
+Seuil de décision: 0.6811
+======================================================================
+
+Classification Binaire - COVID vs Non-COVID
+Classe          Precision    Recall       F1-Score     Support
+------------------------------------------------------------
+Non-COVID       0.9797       0.9838       0.9817       17549
+COVID           0.9198       0.9009       0.9103       3614
+
+Matrice de Confusion:
+============================================================
+                Prédit Non-COVID     Prédit COVID
+------------------------------------------------------------
+Réel Non-COVID  17265                284
+Réel COVID      358                  3256
+
+Interprétation:
+Vrais Négatifs (TN): 17265
+Faux Positifs (FP): 284
+Faux Négatifs (FN): 358
+Vrais Positifs (TP): 3256
+
+Métriques médicales:
+Sensibilité (Recall COVID): 0.9009
+Spécificité (Recall Non-COVID): 0.9838
+
+Seuil de décision utilisé: 0.6811
+
+======================================================================
+COMPARAISON: Seuil 0.5 vs Seuil Optimal
+======================================================================
+
+Métrique                       Seuil 0.5       Seuil Optimal   Amélioration
+---------------------------------------------------------------------------
+Precision COVID                0.8607          0.9198                  +0.0590
+Recall COVID                   0.9405          0.9009                  -0.0396
+F1 COVID                       0.8988          0.9103                  +0.0114
+Faux Positifs (FP)             550             284                        -266
+Faux Négatifs (FN)             215             358                        +143
+
+======================================================================
+ÉTAPE 8: Visualisation
+======================================================================
+Historique d'entraînement vide (modèle chargé sans entraînement)
+Les graphiques d'entraînement ne peuvent pas être affichés.
+AUC: 0.9924
+
+======================================================================
+RÉSUMÉ
+======================================================================
+Modèle: resnet18
+Seuil optimal: 0.6811
+Precision: 0.9198
+Recall: 0.9009
+F1-score: 0.9103
+
+Script terminé (version F1-score)
+
+
