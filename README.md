@@ -32,14 +32,14 @@ Ce projet développe un système de classification automatique d'images radiogra
 
 ### Métriques principales (ResNet18, validation set)
 
-| Métrique | Valeur | Interprétation |
-|----------|--------|----------------|
-| **Accuracy globale** | **96.96%** | Taux de classification correcte |
-| **Précision COVID** | **91.98%** | Fiabilité des prédictions positives |
-| **Sensibilité (Recall)** | **90.09%** | Capacité à détecter les cas COVID |
-| **Spécificité** | **98.38%** | Capacité à identifier les cas normaux |
-| **F1-score COVID** | **91.03%** | Équilibre précision/rappel |
-| **AUC-ROC** | **0.9924** | Excellente capacité de discrimination |
+| Métrique                       | Valeur           | Interprétation                         |
+| ------------------------------- | ---------------- | --------------------------------------- |
+| **Accuracy globale**      | **96.96%** | Taux de classification correcte         |
+| **Précision COVID**      | **91.98%** | Fiabilité des prédictions positives   |
+| **Sensibilité (Recall)** | **90.09%** | Capacité à détecter les cas COVID    |
+| **Spécificité**         | **98.38%** | Capacité à identifier les cas normaux |
+| **F1-score COVID**        | **91.03%** | Équilibre précision/rappel            |
+| **AUC-ROC**               | **0.9924** | Excellente capacité de discrimination  |
 
 ### Matrice de confusion (seuil optimal)
 
@@ -64,14 +64,14 @@ COVID            358     3,256
 
 ### Modèles disponibles
 
-| Architecture | Paramètres | Profondeur | Recommandation |
-|--------------|------------|------------|----------------|
-| ResNet18 | ~11M | 18 couches | Développement rapide |
-| ResNet34 | ~21M | 34 couches | Bon compromis |
+| Architecture       | Paramètres    | Profondeur           | Recommandation                    |
+| ------------------ | -------------- | -------------------- | --------------------------------- |
+| ResNet18           | ~11M           | 18 couches           | Développement rapide             |
+| ResNet34           | ~21M           | 34 couches           | Bon compromis                     |
 | **ResNet50** | **~25M** | **50 couches** | **Production recommandée** |
-| ResNet152 | ~60M | 152 couches | Performance maximale |
-| DenseNet121 | ~8M | 121 couches | Efficace en paramètres |
-| DenseNet161 | ~29M | 161 couches | Haute performance |
+| ResNet152          | ~60M           | 152 couches          | Performance maximale              |
+| DenseNet121        | ~8M            | 121 couches          | Efficace en paramètres           |
+| DenseNet161        | ~29M           | 161 couches          | Haute performance                 |
 
 **Configuration par défaut** : ResNet50 avec fine-tuning sélectif
 

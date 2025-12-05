@@ -1,6 +1,6 @@
 # Classification d'Images Thoraciques COVID-19 : Pipeline de Deep Learning
 
-> **Documentation scientifique et technique complète**  
+> **Documentation scientifique et technique complète**
 > Pour une vue d'ensemble rapide orientée technique et business, consultez [README.md](README.md)
 
 ---
@@ -57,12 +57,13 @@ La classification automatique d'images radiographiques thoraciques pour la detec
 **Sources de donnees** :
 
 1. **COVID-19 Radiography Database (Mendeley)** : [Mendeley Data](https://data.mendeley.com/datasets/dvntn9yhd2/1)
+
    - Base de donnees principale contenant des images radiographiques COVID-19, Normal, Lung Opacity et Viral Pneumonia
-
 2. **Chest X-Ray COVID19 Pneumonia (Kaggle)** : [Kaggle Dataset](https://www.kaggle.com/datasets/prashant268/chest-xray-covid19-pneumonia)
-   - Images de radiographies thoraciques pour COVID-19 et pneumonie
 
+   - Images de radiographies thoraciques pour COVID-19 et pneumonie
 3. **COVID-19 Radiography Database (Kaggle)** : [Kaggle Dataset](https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database?resource=download)
+
    - Base de donnees complete de radiographies COVID-19
 
 **Caracteristiques** :
@@ -519,10 +520,10 @@ visualization = show_cam_on_image(img_rgb, grayscale_cam[0, :], use_rgb=True)
 
 **Metriques observees** (ResNet18, seuil optimal balanced = 0.6514, d'apres rapport d'evaluation) :
 
-| Classe                 | Precision      | Recall         | F1-score       | Support |
-| ---------------------- | -------------- | -------------- | -------------- | ------- |
-| Non-COVID              | 0.9797         | 0.9838         | 0.9817         | 17,549  |
-| COVID                  | 0.9198         | 0.9009         | 0.9103         | 3,614   |
+| Classe                 | Precision        | Recall           | F1-score         | Support |
+| ---------------------- | ---------------- | ---------------- | ---------------- | ------- |
+| Non-COVID              | 0.9797           | 0.9838           | 0.9817           | 17,549  |
+| COVID                  | 0.9198           | 0.9009           | 0.9103           | 3,614   |
 | **Macro avg**    | **0.9498** | **0.9424** | **0.9460** | 21,163  |
 | **Weighted avg** | **0.9696** | **0.9696** | **0.9696** | 21,163  |
 
@@ -554,13 +555,13 @@ visualization = show_cam_on_image(img_rgb, grayscale_cam[0, :], use_rgb=True)
 
 **Comparaison avec seuil par defaut (0.5)** :
 
-| Metrique          | Seuil 0.5 | Seuil Optimal (0.6811) | Amelioration |
-| ----------------- | --------- | ----------------------- | ------------ |
-| Precision COVID   | 0.8607    | 0.9198                  | +0.0591      |
-| Recall COVID      | 0.9405    | 0.9009                  | -0.0396      |
-| F1-score COVID    | 0.8988    | 0.9103                  | +0.0115      |
-| Faux Positifs     | 550       | 284                     | -266         |
-| Faux Negatifs     | 215       | 358                     | +143         |
+| Metrique        | Seuil 0.5 | Seuil Optimal (0.6811) | Amelioration |
+| --------------- | --------- | ---------------------- | ------------ |
+| Precision COVID | 0.8607    | 0.9198                 | +0.0591      |
+| Recall COVID    | 0.9405    | 0.9009                 | -0.0396      |
+| F1-score COVID  | 0.8988    | 0.9103                 | +0.0115      |
+| Faux Positifs   | 550       | 284                    | -266         |
+| Faux Negatifs   | 215       | 358                    | +143         |
 
 **Interpretation** : Le seuil optimal reduit significativement les faux positifs (-48%, de 550 a 284). Cependant, cela s'accompagne d'une augmentation importante des faux negatifs (+67%, de 215 a 358). Ce compromis ameliore la precision (moins de faux positifs) mais reduit la sensibilite (plus de faux negatifs).
 
@@ -696,6 +697,34 @@ SEP25_BMLE_Covid19/
 ---
 
 ## Utilisation
+
+### Installation
+
+#### 1. Cloner le repository
+
+```bash
+git clone <URL_DU_REPOSITORY>
+cd projet_covid/SEP25_BMLE_Covid19
+```
+
+#### 2. Créer un environnement virtuel (recommandé)
+
+```bash
+python -m venv venv
+source venv/bin/activate  # Sur macOS/Linux
+# ou
+venv\Scripts\activate  # Sur Windows
+```
+
+#### 3. Installer les dépendances
+
+```bash
+pip install -r requirements.txt
+```
+
+#### 4. Vérifier la structure des données
+
+Assurez-vous que les données sont organisées selon la structure attendue par le pipeline (voir section [Preprocessing et Preparation des Donnees](#3-preprocessing-et-preparation-des-donnees)).
 
 ### Entrainement
 
