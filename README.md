@@ -4,7 +4,6 @@
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-orange)](https://pytorch.org/)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 ---
 
@@ -236,6 +235,32 @@ Cette documentation inclut :
 
 ---
 
+## Sources de données
+
+Ce projet utilise des images radiographiques thoraciques provenant des sources suivantes :
+
+### 1. COVID-19 Radiography Database (Mendeley)
+
+- **Source** : [Mendeley Data](https://data.mendeley.com/datasets/dvntn9yhd2/1)
+- **Description** : Base de données principale contenant des images radiographiques COVID-19, Normal, Lung Opacity et Viral Pneumonia
+- **Utilisation** : Dataset principal pour l'entraînement et l'évaluation
+
+### 2. Chest X-Ray COVID19 Pneumonia (Kaggle)
+
+- **Source** : [Kaggle Dataset](https://www.kaggle.com/datasets/prashant268/chest-xray-covid19-pneumonia)
+- **Description** : Images de radiographies thoraciques pour COVID-19 et pneumonie
+- **Utilisation** : Enrichissement du dataset avec des cas supplémentaires de COVID-19
+
+### 3. COVID-19 Radiography Database (Kaggle)
+
+- **Source** : [Kaggle Dataset](https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database?resource=download)
+- **Description** : Base de données complète de radiographies COVID-19
+- **Utilisation** : Référence uniquement (non utilisée pour l'enrichissement)
+
+**Note** : L'enrichissement du dataset provient uniquement des sources 1 et 2 (Mendeley Data et Kaggle Chest X-Ray COVID19 Pneumonia). Voir `src/features/enrich_dataset_covid.py` pour le script d'enrichissement.
+
+---
+
 ## Limitations et considérations
 
 ### Limitations actuelles
@@ -255,12 +280,6 @@ Cette documentation inclut :
 ## Contribution
 
 Ce projet est destiné à la recherche et au développement. Pour toute contribution ou question, veuillez ouvrir une issue.
-
----
-
-## Licence
-
-Voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
 ---
 

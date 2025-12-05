@@ -54,11 +54,23 @@ La classification automatique d'images radiographiques thoraciques pour la detec
 
 ### 1.3 Dataset
 
-- **Source principale** : COVID-19 Radiography Dataset
+**Sources de donnees** :
+
+1. **COVID-19 Radiography Database (Mendeley)** : [Mendeley Data](https://data.mendeley.com/datasets/dvntn9yhd2/1)
+   - Base de donnees principale contenant des images radiographiques COVID-19, Normal, Lung Opacity et Viral Pneumonia
+
+2. **Chest X-Ray COVID19 Pneumonia (Kaggle)** : [Kaggle Dataset](https://www.kaggle.com/datasets/prashant268/chest-xray-covid19-pneumonia)
+   - Images de radiographies thoraciques pour COVID-19 et pneumonie
+
+3. **COVID-19 Radiography Database (Kaggle)** : [Kaggle Dataset](https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database?resource=download)
+   - Base de donnees complete de radiographies COVID-19
+
+**Caracteristiques** :
+
 - **Classes** : COVID, Normal, Lung_Opacity, Viral Pneumonia
 - **Mode de classification** : Binaire (COVID vs Non-COVID) ou multi-classe
 - **Distribution initiale** : ~21,000 images (desequilibree)
-- **Enrichissement** : Ajout de ~2,200 images COVID supplementaires
+- **Enrichissement** : Ajout de ~2,200 images COVID supplementaires depuis les sources 1 et 2 (Mendeley Data et Kaggle Chest X-Ray COVID19 Pneumonia)
 
 ---
 
@@ -179,9 +191,11 @@ Les masques de poumons sont appliques pour :
 
 **Sources d'enrichissement** :
 
-- Dataset train/test : ~576 images
-- Dataset externe (Covid19-Pneumonia) : ~1,626 images
+- Source 1 (Mendeley Data) : Images COVID supplementaires
+- Source 2 (Kaggle Chest X-Ray COVID19 Pneumonia) : ~1,626 images COVID
 - **Total ajoute** : ~2,202 images COVID avec masques generes automatiquement
+
+**Note** : La source 3 (Kaggle COVID-19 Radiography Database) n'est pas utilisee pour l'enrichissement, uniquement comme reference.
 
 **Statistiques d'enrichissement** :
 
